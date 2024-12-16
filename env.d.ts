@@ -1,5 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    PUBLIC_URL: string
+    NODE_ENV: string
     NEXT_PUBLIC_FIREBASE_API_KEY: string
     NEXT_PUBLICK_FIREBASE_AUTH_DOMAIN: string
     NEXT_PUBLIC_FIREBASE_PROJECT_ID: string
