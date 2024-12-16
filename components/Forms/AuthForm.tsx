@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { auth } from "@/services/Firebase/firebase"
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useState } from "react"
 import { useRouter } from 'next/navigation'
 import { registerUserAction } from "@/services/Firebase/actions"
@@ -33,7 +31,6 @@ export function AuthForm({ isLogin }: Props) {
     fullName: ''
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [createUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
   const router = useRouter()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

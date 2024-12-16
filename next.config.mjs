@@ -4,10 +4,6 @@ const remotePatterns = [
   {
     hostname: 'localhost',
     port: ''
-  },
-  {
-    hostname: 'randomuser.me',
-    port: ''
   }
 ]
 
@@ -23,7 +19,7 @@ const nextConfig = {
   images: {
     remotePatterns
   },
-  reactStrictMode: false,
+  // reactStrictMode: false,
   assetPrefix: isProd ? process.env.PUBLIC_URL : undefined
 }
 
