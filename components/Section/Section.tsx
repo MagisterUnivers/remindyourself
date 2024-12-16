@@ -1,14 +1,16 @@
 'use client'
 
+import { cn } from "@/lib/utils"
 import { checkUserAuth } from "@/utils/check-user-auth"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 interface Props {
-  //
+  children: React.ReactNode
+  classNames: string
 }
 
-export const ParentItemsHolder = ({ }: Props): React.ReactNode => {
+export const Section = ({ children, classNames }: Props): React.ReactNode => {
   const router = useRouter()
 
   useEffect(() => {
@@ -20,6 +22,8 @@ export const ParentItemsHolder = ({ }: Props): React.ReactNode => {
   }, [])
 
   return (
-    <>Hello</>
+    <section className={cn("", classNames)}>
+      {children}
+    </section>
   )
 }
