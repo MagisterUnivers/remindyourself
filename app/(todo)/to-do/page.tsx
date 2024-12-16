@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
-import { checkUserAuth } from '@/utils/check-user-auth'
 import { ParentItemsHolder } from '@/components/Lists/ParentItemsHolder'
+import { Header } from '@/components/Header/Header'
 
 export async function generateMetadata(): Promise<MetadataResultTitle> {
   return {
@@ -14,7 +14,9 @@ export async function generateMetadata(): Promise<MetadataResultTitle> {
 export default async function Page(): Promise<React.ReactNode> {
   return (
     <>
-      <header className='hidden' />
+      <header>
+        <Header />
+      </header>
       <main className='relative'>
         <div>
           <Suspense fallback={<div>Loading...</div>}>

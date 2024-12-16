@@ -1,5 +1,5 @@
 import { auth, db } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
 export const registerUserAction = async (email: string, password: string, fullName: string) => {
@@ -36,5 +36,13 @@ export const loginUserAction = async (email: string, password: string) => {
   } catch (error) {
     console.error("Error during login:", error);
     return { success: false, error };
+  }
+};
+
+export const logoutUserAction = async (): Promise<void> => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout error:', error);
   }
 };
