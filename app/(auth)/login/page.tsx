@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { LoginForm } from '@/components/Forms/LoginForm'
+import { AuthForm } from '@/components/Forms/AuthForm'
 
 export async function generateMetadata(): Promise<MetadataResultTitle> {
   return {
@@ -26,7 +26,7 @@ export default async function Page(): Promise<React.ReactNode> {
       <main className='relative'>
         <div>
           <Suspense fallback={<div>Loading...</div>}>
-            <LoginForm />
+            <AuthForm isLogin />
           </Suspense>
         </div>
       </main>
