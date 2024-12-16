@@ -24,7 +24,7 @@ export default async function Page(): Promise<React.ReactNode> {
     <>
       <header className='hidden' />
       <main className='relative'>
-        <div className='smobile:fixed smobile:inset-0 smobile:items-center smobile:justify-center smobile:z-50 laptop:w-[50%]'>
+        <div>
           <Suspense fallback={<div>Loading...</div>}>
             <LoginForm />
           </Suspense>
