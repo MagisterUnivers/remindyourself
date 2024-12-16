@@ -10,9 +10,10 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from 'next/navigation'
-import { registerUserAction } from "@/services/Firebase/actions"
+import { loginUserAction, registerUserAction } from "@/services/Firebase/actions"
+import { checkUserAuth } from "@/utils/check-user-auth"
 
 interface Props {
   isLogin: boolean
@@ -40,14 +41,18 @@ export function AuthForm({ isLogin }: Props) {
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
-    setIsLoading(!isLoading)
     try {
-      // const res = await useSignInWithEmailAndPassword(formData.email, formData.password);
-      // console.log({ res });
-      // sessionStorage.setItem('user', true)
-      // setEmail('');
-      // setPassword('');
-      router.push('/')
+      e.preventDefault()
+      setIsLoading(true)
+      const result = await loginUserAction(formData.email, formData.password)
+      if (result.success) {
+        alert('User has entered profile')
+        setIsLoading(false)
+        router.push('/to-do')
+      } else {
+        alert('There is an error during the login process')
+        setIsLoading(false)
+      }
     } catch (e) {
       console.error(e)
     }
@@ -65,6 +70,14 @@ export function AuthForm({ isLogin }: Props) {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    const isAuth = checkUserAuth()
+
+    if (isAuth !== null) {
+      router.push('/to-do')
+    }
+  }, [])
 
   return (
     <div className={"flex flex-col gap-6 fixed top-[50%] left-[50%] w-[50%] -translate-y-2/4 -translate-x-2/4"}>

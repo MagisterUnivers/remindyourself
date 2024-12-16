@@ -19,7 +19,7 @@ const nextConfig = {
   images: {
     remotePatterns
   },
-  // reactStrictMode: false,
+  reactStrictMode: false,
   assetPrefix: isProd ? process.env.PUBLIC_URL : undefined
 }
 
