@@ -1,19 +1,19 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useEffect, useState } from "react"
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { loginUserAction, registerUserAction } from "@/services/Firebase/actions"
-import { checkUserAuth } from "@/utils/check-user-auth"
+import { loginUserAction, registerUserAction } from '@/services/Firebase/actions'
+import { checkUserAuth } from '@/utils/check-user-auth'
 
 interface Props {
   isLogin: boolean
@@ -25,7 +25,7 @@ interface FormData {
   fullName: string
 }
 
-export function AuthForm({ isLogin }: Props) {
+export const AuthForm = ({ isLogin }: Props): React.ReactNode => {
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
@@ -56,7 +56,7 @@ export function AuthForm({ isLogin }: Props) {
     } catch (e) {
       console.error(e)
     }
-  };
+  }
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
@@ -80,67 +80,67 @@ export function AuthForm({ isLogin }: Props) {
   }, [])
 
   return (
-    <div className={"flex flex-col gap-6 fixed top-[50%] left-[50%] w-[50%] -translate-y-2/4 -translate-x-2/4"}>
+    <div className={'flex flex-col gap-6 fixed top-[50%] left-[50%] w-[50%] -translate-y-2/4 -translate-x-2/4'}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">{isLogin ? "Login" : "Register"}</CardTitle>
+          <CardTitle className='text-2xl'>{isLogin ? 'Login' : 'Register'}</CardTitle>
           <CardDescription>
-            {`Enter your email and password below to ${isLogin ? "login" : "register"} to your account`}
+            {`Enter your email and password below to ${isLogin ? 'login' : 'register'} to your account`}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={(e) => isLogin ? handleSignIn(e) : handleSignUp(e)}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+            <div className='flex flex-col gap-6'>
+              <div className='grid gap-2'>
+                <Label htmlFor='email'>Email</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id='email'
+                  type='email'
+                  name='email'
                   value={formData.email}
                   onChange={(e) => onChange(e)}
-                  placeholder="johndoe@example.com"
+                  placeholder='johndoe@example.com'
                   required
                 />
               </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+              <div className='grid gap-2'>
+                <div className='flex items-center'>
+                  <Label htmlFor='password'>Password</Label>
                   <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    href='#'
+                    className='ml-auto inline-block text-sm underline-offset-4 hover:underline'
                   >
                     Forgot your password?
                   </a>
                 </div>
                 <Input
-                  id="password"
-                  type="password"
-                  name="password"
+                  id='password'
+                  type='password'
+                  name='password'
                   value={formData.password}
                   onChange={(e) => onChange(e)}
                   required />
               </div>
               {!isLogin && (
-                <div className="grid gap-2">
-                  <Label htmlFor="email">FullName</Label>
+                <div className='grid gap-2'>
+                  <Label htmlFor='email'>FullName</Label>
                   <Input
-                    id="fullName"
-                    type="fullName"
-                    name="fullName"
+                    id='fullName'
+                    type='fullName'
+                    name='fullName'
                     value={formData.fullName}
                     onChange={(e) => onChange(e)}
-                    placeholder="John Doe"
+                    placeholder='John Doe'
                     required
                   />
                 </div>
               )}
               <Button
-                type="submit"
-                className="w-full disabled:cursor-not-allowed"
+                type='submit'
+                className='w-full disabled:cursor-not-allowed'
                 disabled={isLoading}
               >
-                {isLogin ? "LOGIN" : "REGISTER"}
+                {isLogin ? 'LOGIN' : 'REGISTER'}
               </Button>
             </div>
           </form>

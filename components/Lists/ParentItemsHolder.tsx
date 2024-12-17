@@ -1,6 +1,6 @@
 'use client'
 
-import { ParentBoard } from "../Boards/ParentBoard"
+import { ParentBoard } from '../Boards/ParentBoard'
 // import { useRouter } from "next/navigation"
 
 interface Props {

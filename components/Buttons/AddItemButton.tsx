@@ -1,6 +1,6 @@
 'use client'
 
-import { CirclePlus } from "lucide-react"
+import { CirclePlus } from 'lucide-react'
 
 interface Props {
   title: string

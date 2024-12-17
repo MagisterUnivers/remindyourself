@@ -2,7 +2,7 @@ import { Header } from '@/components/Header/Header'
 import { getBoardsAction } from '@/services/Firebase/actions'
 import { ParentToDoWrapper } from '@/components/Wrappers/ParentToDoWrapper'
 
-export async function generateMetadata(): Promise<MetadataResultTitle> {
+export const generateMetadata = async (): Promise<MetadataResultTitle> => {
   return {
     title: 'RY - TO-DO',
     openGraph: {
@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<MetadataResultTitle> {
   }
 }
 
-export default async function Page(): Promise<React.ReactNode> {
+const Page = async (): Promise<React.ReactNode> => {
   const parentBoards: ParentBoards = await getBoardsAction()
   return (
     <>
@@ -25,3 +25,5 @@ export default async function Page(): Promise<React.ReactNode> {
     </>
   )
 }
+
+export default Page

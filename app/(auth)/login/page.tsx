@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { AuthForm } from '@/components/Forms/AuthForm'
 
-export async function generateMetadata(): Promise<MetadataResultTitle> {
+export const generateMetadata = async (): Promise<MetadataResultTitle> => {
   return {
     title: 'RY - Login',
     openGraph: {
@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<MetadataResultTitle> {
   }
 }
 
-export default async function Page(): Promise<React.ReactNode> {
+const Page = async (): Promise<React.ReactNode> => {
   return (
     <>
       <header className='hidden' />
@@ -25,3 +25,5 @@ export default async function Page(): Promise<React.ReactNode> {
     </>
   )
 }
+
+export default Page

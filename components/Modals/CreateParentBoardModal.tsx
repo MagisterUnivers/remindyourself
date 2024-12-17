@@ -19,7 +19,7 @@ interface Props {
   onBoardCreate: (board: ParentBoard) => void
 }
 
-export function CreateParentBoardModal({ onBoardCreate }: Props): React.ReactNode {
+export const CreateParentBoardModal = ({ onBoardCreate }: Props): React.ReactNode => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({

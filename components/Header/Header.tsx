@@ -17,7 +17,7 @@ import { checkUserAuth } from '@/utils/check-user-auth'
 import { useEffect } from 'react'
 import { logoutUserAction } from '@/services/Firebase/actions'
 
-export function Header(): React.ReactNode {
+export const Header = (): React.ReactNode => {
   const router = useRouter()
 
   const handleLogout = (): void => {

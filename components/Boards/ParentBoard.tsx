@@ -1,8 +1,8 @@
 'use client'
 
-import { deleteBoardAction } from "@/services/Firebase/actions"
-import { Eraser, Pencil } from "lucide-react"
-import { useState } from "react"
+import { deleteBoardAction } from '@/services/Firebase/actions'
+import { Eraser, Pencil } from 'lucide-react'
+import { useState } from 'react'
 // import { useRouter } from "next/navigation"
 
 interface Props {
@@ -38,9 +38,9 @@ export const ParentBoard = ({ parentBoard, onBoardDelete }: Props): React.ReactN
           title="Delete board"
           disabled={isLoading}
           onClick={() => {
-            const isConfirmed = window.confirm("Are you sure, you want to delete that board?");
+            const isConfirmed = window.confirm('Are you sure, you want to delete that board?')
             if (isConfirmed) {
-              handleBoardDelete();
+              handleBoardDelete()
             }
           }}
         >
