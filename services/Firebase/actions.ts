@@ -1,6 +1,6 @@
 import { auth, db } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 export const registerUserAction = async (email: string, password: string, fullName: string) => {
   try {
@@ -44,5 +44,25 @@ export const logoutUserAction = async (): Promise<void> => {
     await signOut(auth);
   } catch (error) {
     console.error('Logout error:', error);
+  }
+};
+
+export const getBoards = async (userId: number | string) => {
+  const boardsCollection = collection(db, "boards");
+  const boardsSnapshot = await getDocs(boardsCollection);
+  const boardsList = boardsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return boardsList;
+};
+
+export const addBoard = async (userId: number | string, title: string) => {
+  try {
+    const docRef = await addDoc(collection(db, "boards"), {
+      title,
+      userId,
+      createdAt: new Date(),
+    });
+    console.log("New board added with ID: ", docRef.id);
+  } catch (error) {
+    console.error("Error adding board: ", error);
   }
 };

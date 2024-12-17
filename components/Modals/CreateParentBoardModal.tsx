@@ -14,6 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { AddItemButton } from '../Buttons/AddItemButton'
+import { addBoard } from '@/services/Firebase/actions'
 
 interface Props {
   //
@@ -21,25 +22,38 @@ interface Props {
 
 export function CreateParentBoardModal({ }: Props): React.ReactNode {
   const router = useRouter()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     boardTitle: ''
   })
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  const handleOpenModal = (): void => {
+    setIsOpen(true)
+  }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     setLoading(true)
+    const userId = JSON.parse((localStorage.getItem('user')) as string).uid
+    addBoard(userId, formData.boardTitle).then(() => {
+      setLoading(false)
+    }).catch((err) => console.error(err))
   }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <AddItemButton title='Add Parent Board' isWithIcon />
+        <AddItemButton
+          title='Add Parent Board'
+          isWithIcon
+          onClickF={handleOpenModal}
+        />
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
