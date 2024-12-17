@@ -1,7 +1,7 @@
 import { ParentItemsHolder } from '@/components/Lists/ParentItemsHolder'
 import { Header } from '@/components/Header/Header'
 import { Section } from '@/components/Section/Section'
-import { AddItemButton } from '@/components/Buttons/AddItemButton'
+import { CreateParentBoardModal } from '@/components/Modals/CreateParentBoardModal'
 
 export async function generateMetadata(): Promise<MetadataResultTitle> {
   return {
@@ -20,7 +20,7 @@ export default async function Page(): Promise<React.ReactNode> {
       </header>
       <main className='relative'>
         <Section classNames='p-[25px]'>
-          <AddItemButton title='Add Parent Board' />
+          <CreateParentBoardModal />
         </Section>
         <Section>
           <ParentItemsHolder />
