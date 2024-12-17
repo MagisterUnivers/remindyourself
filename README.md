@@ -13,32 +13,7 @@ This is a simple Task Manager application built using Next.js and Firebase. The 
 
 ## 🚀 Project Setup
 
-### Step 1: Clone the repository
-
-```bash
-git clone https://github.com/your-repo/my-project.git
-```
-
----
-
-# Once cloned, navigate into the two directories:
-
-Frontend: my-next-app
-
-Backend: my-nest-testing
-
----
-
-
-4. Start the backend server:
-
-```bash
-npm run start:dev
-```
-
-5. The backend server should now be running on http://localhost:8080.
-
-### Step 3: Frontend Setup (Next.js)
+### Step 1: Frontend Setup (Next.js)
 Navigate to the frontend directory:
 
 ```bash
