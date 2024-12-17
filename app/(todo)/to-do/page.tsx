@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
 import { ParentItemsHolder } from '@/components/Lists/ParentItemsHolder'
 import { Header } from '@/components/Header/Header'
+import { Section } from '@/components/Section/Section'
 
 export async function generateMetadata(): Promise<MetadataResultTitle> {
   return {
@@ -18,11 +18,9 @@ export default async function Page(): Promise<React.ReactNode> {
         <Header />
       </header>
       <main className='relative'>
-        <div>
-          <Suspense fallback={<div>Loading...</div>}>
-            <ParentItemsHolder />
-          </Suspense>
-        </div>
+        <Section>
+          <ParentItemsHolder />
+        </Section>
       </main>
       <footer className='hidden' />
     </>

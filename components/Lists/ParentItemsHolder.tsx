@@ -1,25 +1,17 @@
 'use client'
 
-import { checkUserAuth } from "@/utils/check-user-auth"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+// import { useRouter } from "next/navigation"
+import { ParentBoard } from "../Boards/ParentBoard"
 
 interface Props {
   //
 }
 
 export const ParentItemsHolder = ({ }: Props): React.ReactNode => {
-  const router = useRouter()
-
-  useEffect(() => {
-    const isAuth = checkUserAuth()
-
-    if (isAuth === null) {
-      router.push('/login')
-    }
-  }, [])
-
+  // const router = useRouter()
   return (
-    <>Hello</>
+    <ul>
+      <ParentBoard />
+    </ul>
   )
 }

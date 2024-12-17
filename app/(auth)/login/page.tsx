@@ -11,15 +11,6 @@ export async function generateMetadata(): Promise<MetadataResultTitle> {
 }
 
 export default async function Page(): Promise<React.ReactNode> {
-  // const session: SessionType | null = await getServerSession(authOptions)
-  // const lastPropertyData = await getLastProperty()
-
-  // if (lastPropertyData === null) return null
-
-  // if (session !== null) {
-  //   redirect('/admin/properties')
-  // }
-
   return (
     <>
       <header className='hidden' />

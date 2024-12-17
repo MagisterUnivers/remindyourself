@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 interface Props {
   children: React.ReactNode
-  classNames: string
+  classNames?: string
 }
 
 export const Section = ({ children, classNames }: Props): React.ReactNode => {
@@ -22,7 +22,7 @@ export const Section = ({ children, classNames }: Props): React.ReactNode => {
   }, [])
 
   return (
-    <section className={cn("", classNames)}>
+    <section className={cn("p-20 h-full w-full", classNames)}>
       {children}
     </section>
   )
