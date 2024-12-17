@@ -122,7 +122,6 @@ export const addTaskAction = async (boardId: string, title: string) => {
       title,
       createdAt: new Date(),
     })
-    console.log('New task added with ID: ', docRef.id)
     const docSnapshot = await getDoc(doc(db, 'tasks', docRef.id))
     const data = docSnapshot.data()
 
@@ -145,7 +144,6 @@ export const addTaskAction = async (boardId: string, title: string) => {
 export const deleteTaskAction = async (taskId: string) => {
   try {
     await deleteDoc(doc(db, 'tasks', taskId))
-    console.log('Task deleted successfully')
   } catch (error) {
     console.error('Error deleting task: ', error)
   }
