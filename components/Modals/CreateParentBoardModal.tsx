@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -14,14 +13,9 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { AddItemButton } from '../Buttons/AddItemButton'
-import { addBoard } from '@/services/Firebase/actions'
+import { addBoardAction } from '@/services/Firebase/actions'
 
-interface Props {
-  //
-}
-
-export function CreateParentBoardModal({ }: Props): React.ReactNode {
-  const router = useRouter()
+export function CreateParentBoardModal(): React.ReactNode {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -41,7 +35,7 @@ export function CreateParentBoardModal({ }: Props): React.ReactNode {
     e.preventDefault()
     setLoading(true)
     const userId = JSON.parse((localStorage.getItem('user')) as string).uid
-    addBoard(userId, formData.boardTitle).then(() => {
+    addBoardAction(userId, formData.boardTitle).then(() => {
       setLoading(false)
     }).catch((err) => console.error(err))
   }

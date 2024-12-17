@@ -2,6 +2,7 @@ import { ParentItemsHolder } from '@/components/Lists/ParentItemsHolder'
 import { Header } from '@/components/Header/Header'
 import { Section } from '@/components/Section/Section'
 import { CreateParentBoardModal } from '@/components/Modals/CreateParentBoardModal'
+import { getBoardsAction } from '@/services/Firebase/actions'
 
 export async function generateMetadata(): Promise<MetadataResultTitle> {
   return {
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<MetadataResultTitle> {
 }
 
 export default async function Page(): Promise<React.ReactNode> {
+  const parentBoards: ParentBoards = await getBoardsAction()
   return (
     <>
       <header>
@@ -23,7 +25,7 @@ export default async function Page(): Promise<React.ReactNode> {
           <CreateParentBoardModal />
         </Section>
         <Section>
-          <ParentItemsHolder />
+          <ParentItemsHolder parentBoards={parentBoards} />
         </Section>
       </main>
       <footer className='hidden' />

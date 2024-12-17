@@ -4,3 +4,11 @@ declare interface MetadataResultTitle {
     title: string
   }
 }
+
+declare type ParentBoards = ParentBoard[]
+
+declare interface ParentBoard {
+  createdAt: Date | null
+  id: string
+  title: string
+}

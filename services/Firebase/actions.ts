@@ -47,14 +47,22 @@ export const logoutUserAction = async (): Promise<void> => {
   }
 };
 
-export const getBoards = async (userId: number | string) => {
+export const getBoardsAction = async (): Promise<ParentBoards> => {
   const boardsCollection = collection(db, "boards");
   const boardsSnapshot = await getDocs(boardsCollection);
-  const boardsList = boardsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  const boardsList = boardsSnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      title: data.title,
+      ...data,
+      createdAt: data.createdAt ? new Date(data.createdAt.seconds * 1000) : null,
+    };
+  });
   return boardsList;
 };
 
-export const addBoard = async (userId: number | string, title: string) => {
+export const addBoardAction = async (userId: number | string, title: string) => {
   try {
     const docRef = await addDoc(collection(db, "boards"), {
       title,
