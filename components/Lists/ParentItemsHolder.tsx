@@ -1,7 +1,6 @@
 'use client'
 
 import { ParentBoard } from '../Boards/ParentBoard'
-// import { useRouter } from "next/navigation"
 
 interface Props {
   parentBoards: ParentBoards | null
@@ -9,7 +8,6 @@ interface Props {
 }
 
 export const ParentItemsHolder = ({ parentBoards, onBoardDelete }: Props): React.ReactNode => {
-  // const router = useRouter()
   return (
     parentBoards === undefined ? (
       <h2>No boards was founded.</h2>

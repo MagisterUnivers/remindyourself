@@ -46,10 +46,10 @@ export const Header = (): React.ReactNode => {
           <span className='sr-only'>Admin Panel</span>
         </Link>
         <Link
-          href='/admin/properties'
-          className='text-muted-foreground transition-colors hover:text-foreground'
+          href='/to-do'
+          className='text-muted-foreground transition-colors hover:text-foreground whitespace-nowrap'
         >
-          Properties
+          TO-DO
         </Link>
       </nav>
       <Sheet>

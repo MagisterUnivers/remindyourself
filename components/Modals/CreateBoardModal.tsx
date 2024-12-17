@@ -13,13 +13,15 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { AddItemButton } from '../Buttons/AddItemButton'
-import { addBoardAction } from '@/services/Firebase/actions'
+import { addBoardAction, addTaskAction } from '@/services/Firebase/actions'
 
 interface Props {
-  onBoardCreate: (board: ParentBoard) => void
+  onBoardCreate: (board: ParentBoard | ChildrenBoard) => void
+  boardId: string
+  isChildren: boolean
 }
 
-export const CreateParentBoardModal = ({ onBoardCreate }: Props): React.ReactNode => {
+export const CreateBoardModal = ({ onBoardCreate, isChildren, boardId }: Props): React.ReactNode => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -39,27 +41,38 @@ export const CreateParentBoardModal = ({ onBoardCreate }: Props): React.ReactNod
     e.preventDefault()
     setLoading(true)
     const userId = JSON.parse((localStorage.getItem('user')) as string).uid
-    addBoardAction(userId, formData.boardTitle).then((res) => {
-      onBoardCreate(res as ParentBoard)
-      setFormData({ boardTitle: '' })
-      setLoading(false)
-    }).catch((err) => console.error(err))
+
+    if (isChildren !== undefined) {
+      addTaskAction(boardId, formData.boardTitle).then((res) => {
+        onBoardCreate(res as ChildrenBoard)
+        setFormData({ boardTitle: '' })
+        setLoading(false)
+      }).catch((err) => console.error(err))
+    } else {
+      addBoardAction(userId, formData.boardTitle).then((res) => {
+        onBoardCreate(res as ParentBoard)
+        setFormData({ boardTitle: '' })
+        setLoading(false)
+      }).catch((err) => console.error(err))
+    }
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <AddItemButton
-          title='Add Parent Board'
+          title={isChildren ? 'Add Children Board' : 'Add Parent Board'}
           isWithIcon
           onClickF={handleOpenModal}
         />
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Create Parent Board</DialogTitle>
+          <DialogTitle>{isChildren ? 'Create Children Board' : 'Create  Parent Board'}</DialogTitle>
           <DialogDescription>
-            You need to enter Parent Board Name.
+            {isChildren
+              ? 'You need to enter Children Board Name.'
+              : 'You need to enter Parent Board Name.'}
           </DialogDescription>
         </DialogHeader>
         <form className='grid gap-4 py-4' onSubmit={handleSubmit}>

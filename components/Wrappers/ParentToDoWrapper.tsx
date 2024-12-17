@@ -2,7 +2,7 @@
 
 import { ParentItemsHolder } from '@/components/Lists/ParentItemsHolder'
 import { Section } from '@/components/Section/Section'
-import { CreateParentBoardModal } from '@/components/Modals/CreateParentBoardModal'
+import { CreateBoardModal } from '@/components/Modals/CreateBoardModal'
 import { useState } from 'react'
 
 interface Props {
@@ -23,7 +23,7 @@ export const ParentToDoWrapper = ({ parentBoards }: Props): React.ReactNode => {
   return (
     <>
       <Section classNames='p-[25px]'>
-        <CreateParentBoardModal onBoardCreate={handleAddParentBoard} />
+        <CreateBoardModal onBoardCreate={handleAddParentBoard} isChildren={false} boardId='' />
       </Section>
       <Section>
         <ParentItemsHolder parentBoards={allParentBoards} onBoardDelete={handleDeleteParentBoard} />
