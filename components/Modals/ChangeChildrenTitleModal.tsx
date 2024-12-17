@@ -16,12 +16,11 @@ import { updateTaskTitleAction } from '@/services/Firebase/actions'
 interface Props {
   onBoardUpdate: (board: ChildrenBoard) => void
   onModalClose: () => void
-  boardId: string
   isModalOpen: boolean
   selectedBoard: ChildrenBoard | null
 }
 
-export const ChangeChildrenTitleModal = ({ onBoardUpdate, onModalClose, selectedBoard, isModalOpen, boardId }: Props): React.ReactNode => {
+export const ChangeChildrenTitleModal = ({ onBoardUpdate, onModalClose, selectedBoard, isModalOpen }: Props): React.ReactNode => {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     boardTitle: ''
@@ -36,7 +35,7 @@ export const ChangeChildrenTitleModal = ({ onBoardUpdate, onModalClose, selected
     e.preventDefault()
     setLoading(true)
 
-    updateTaskTitleAction(boardId, formData.boardTitle).then(() => {
+    updateTaskTitleAction(selectedBoard?.id as string, formData.boardTitle).then(() => {
       onBoardUpdate({
         createdAt: selectedBoard?.createdAt as Date,
         id: selectedBoard?.id as string,

@@ -6,13 +6,12 @@ import { ChangeChildrenTitleModal } from '../Modals/ChangeChildrenTitleModal'
 
 interface Props {
   childrenBoards: ChildrenBoards | null
-  boardId: string
   onBoardDelete: (board: ChildrenBoard) => void
   onBoardSelect: (board: ChildrenBoard) => void
   onBoardUpdate: (board: ChildrenBoard) => void
 }
 
-export const ChildItemsHolder = ({ childrenBoards, boardId, onBoardDelete, onBoardSelect, onBoardUpdate }: Props): React.ReactNode => {
+export const ChildItemsHolder = ({ childrenBoards, onBoardDelete, onBoardSelect, onBoardUpdate }: Props): React.ReactNode => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [selectedBoard, setSelectedBoard] = useState<ChildrenBoard | null>(null)
 
@@ -45,7 +44,6 @@ export const ChildItemsHolder = ({ childrenBoards, boardId, onBoardDelete, onBoa
           onModalClose={closeModal}
           isModalOpen={isModalOpen}
           selectedBoard={selectedBoard}
-          boardId={boardId}
         />
       </ul>
     )
