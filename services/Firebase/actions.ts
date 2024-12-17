@@ -1,6 +1,6 @@
 import { auth, db } from './firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
 
 export const registerUserAction = async (email: string, password: string, fullName: string) => {
   try {
@@ -146,5 +146,18 @@ export const deleteTaskAction = async (taskId: string) => {
     await deleteDoc(doc(db, 'tasks', taskId))
   } catch (error) {
     console.error('Error deleting task: ', error)
+  }
+}
+
+export const updateTaskTitleAction = async (taskId: string, newTitle: string) => {
+  try {
+    const taskRef = doc(db, 'tasks', taskId)
+    await updateDoc(taskRef, {
+      title: newTitle,
+    })
+
+    // not waisting time to wait for updated object, we have 1 on front-end
+  } catch (error) {
+    console.error('Error updating task title: ', error)
   }
 }

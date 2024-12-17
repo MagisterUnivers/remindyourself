@@ -22,6 +22,10 @@ export const ChildToDoWrapper = ({ childrenBoards, parentBoardId }: Props): Reac
     setAllChildrenBoards(allChildrenBoards?.filter(it => it.id !== board.id) as ChildrenBoards)
   }
 
+  const handleUpdateChildrenBoard = (board: ChildrenBoard): void => {
+    console.log(board)
+  }
+
   const handleChangeSelectedBoardId = (board: ChildrenBoard): void => {
     setSelectedBoardId(board.id)
     void selectedBoardId // temp for eslint
@@ -39,8 +43,10 @@ export const ChildToDoWrapper = ({ childrenBoards, parentBoardId }: Props): Reac
       <Section>
         <ChildItemsHolder
           childrenBoards={allChildrenBoards}
+          boardId={parentBoardId}
           onBoardDelete={handleDeleteChildrenBoard}
           onBoardSelect={handleChangeSelectedBoardId}
+          onBoardUpdate={handleUpdateChildrenBoard}
         />
       </Section>
     </>

@@ -10,7 +10,7 @@ interface Props {
 export const ParentItemsHolder = ({ parentBoards, onBoardDelete }: Props): React.ReactNode => {
   return (
     parentBoards === undefined ? (
-      <h2>No boards was founded.</h2>
+      <h2 className='font-semibold'>No boards was founded.</h2>
     ) : (
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {parentBoards?.map(board => (
