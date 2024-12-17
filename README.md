@@ -50,6 +50,7 @@ npm run build && npm run start
 ### Application Flow
 
 - User List: View all created tasks.
+- User List: Modify / Delete created tasks.
 
 # Frontend (Next.js)
 
