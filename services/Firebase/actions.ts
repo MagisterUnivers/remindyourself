@@ -1,6 +1,6 @@
 import { auth, db } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 
 export const registerUserAction = async (email: string, password: string, fullName: string) => {
   try {
@@ -31,7 +31,6 @@ export const loginUserAction = async (email: string, password: string) => {
       fullName: user.displayName || '',
     }));
 
-    console.log("User logged in:", user.uid);
     return { success: true, user };
   } catch (error) {
     console.error("Error during login:", error);
@@ -69,8 +68,24 @@ export const addBoardAction = async (userId: number | string, title: string) => 
       userId,
       createdAt: new Date(),
     });
-    console.log("New board added with ID: ", docRef.id);
+    const docSnapshot = await getDoc(doc(db, "boards", docRef.id));
+    const data = docSnapshot.data()
+
+    if (docSnapshot.exists()) {
+      const newBoard: ParentBoard = { id: docSnapshot.id, title: data?.title, createdAt: data?.createdAt, ...docSnapshot.data() };
+      return newBoard;
+    } else {
+      //
+    }
   } catch (error) {
     console.error("Error adding board: ", error);
+  }
+};
+
+export const deleteBoardAction = async (boardId: string): Promise<void> => {
+  try {
+    await deleteDoc(doc(db, "boards", boardId));
+  } catch (error) {
+    console.error("Error deleting board: ", error);
   }
 };

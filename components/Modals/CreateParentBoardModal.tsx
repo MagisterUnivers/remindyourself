@@ -15,7 +15,11 @@ import { Label } from '@/components/ui/label'
 import { AddItemButton } from '../Buttons/AddItemButton'
 import { addBoardAction } from '@/services/Firebase/actions'
 
-export function CreateParentBoardModal(): React.ReactNode {
+interface Props {
+  onBoardCreate: (board: ParentBoard) => void
+}
+
+export function CreateParentBoardModal({ onBoardCreate }: Props): React.ReactNode {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -35,7 +39,9 @@ export function CreateParentBoardModal(): React.ReactNode {
     e.preventDefault()
     setLoading(true)
     const userId = JSON.parse((localStorage.getItem('user')) as string).uid
-    addBoardAction(userId, formData.boardTitle).then(() => {
+    addBoardAction(userId, formData.boardTitle).then((res) => {
+      onBoardCreate(res as ParentBoard)
+      setFormData({ boardTitle: '' })
       setLoading(false)
     }).catch((err) => console.error(err))
   }
